@@ -1,0 +1,10 @@
+services:
+  markitdown:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    image: markitdown-docker:local
+    volumes:
+      - ./data/input:/data/input
+      - ./data/output:/data/output
+      - ./docker/markitdown:/app
