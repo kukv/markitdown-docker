@@ -11,12 +11,17 @@ OUTPUT_DIR = Path("/data/output")
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".pptx", ".xlsx", ".xls"}
 
 
+def _is_user_file(path: Path) -> bool:
+    """直下の通常ファイルで、ドットファイル（.gitkeep など）を除外する。"""
+    return path.is_file() and not path.name.startswith(".")
+
+
 def find_target_files(input_dir: Path) -> list[Path]:
     """input_dir 直下の対応拡張子ファイルを名前順で返す。"""
     return sorted(
         p
         for p in input_dir.iterdir()
-        if p.is_file() and p.suffix.lower() in SUPPORTED_EXTENSIONS
+        if _is_user_file(p) and p.suffix.lower() in SUPPORTED_EXTENSIONS
     )
 
 
@@ -38,7 +43,7 @@ def convert_all(input_dir: Path, output_dir: Path, converter) -> ConversionResul
     非対応ファイルはスキップ、変換例外は記録して続行する（バッチを止めない）。
     """
     output_dir.mkdir(parents=True, exist_ok=True)
-    all_files = [p for p in input_dir.iterdir() if p.is_file()]
+    all_files = [p for p in input_dir.iterdir() if _is_user_file(p)]
     targets = find_target_files(input_dir)
     skipped = sorted(
         p for p in all_files if p.suffix.lower() not in SUPPORTED_EXTENSIONS

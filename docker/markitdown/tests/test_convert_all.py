@@ -67,3 +67,27 @@ def test_convert_all_warns_on_output_collision(tmp_path, capsys):
     assert "衝突" in captured.out
     # 名前順で report.docx → report.pdf の順に処理され、後勝ちで .pdf が残る
     assert (out / "report.md").read_text(encoding="utf-8") == ".pdf"
+
+
+def test_convert_all_ignores_dotfiles(tmp_path):
+    """ドットファイル（.gitkeep など）はスキップ件数に含まれない。"""
+    inp, out = tmp_path / "in", tmp_path / "out"
+    make_files(inp, [".gitkeep"])
+
+    result = convert.convert_all(inp, out, lambda p: "x")
+
+    assert result.skipped == []
+    assert result.succeeded == []
+    assert result.failed == []
+
+
+def test_convert_all_ignores_dotfiles_alongside_real_file(tmp_path):
+    """.gitkeep がある場合でも、実ファイルは正常に変換される。"""
+    inp, out = tmp_path / "in", tmp_path / "out"
+    make_files(inp, [".gitkeep", "a.docx"])
+
+    result = convert.convert_all(inp, out, lambda p: f"# {p.name}")
+
+    assert result.skipped == []
+    assert result.succeeded == [inp / "a.docx"]
+    assert (out / "a.md").read_text(encoding="utf-8") == "# a.docx"
