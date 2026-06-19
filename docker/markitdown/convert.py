@@ -1,6 +1,7 @@
 """markitdown batch converter — converts documents in /data/input to Markdown in /data/output."""
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -76,9 +77,17 @@ def format_summary(result: ConversionResult) -> str:
 
 
 def main() -> int:
-    print("convert.py: not implemented yet")
+    from markitdown import MarkItDown
+
+    md = MarkItDown()
+
+    def converter(path: Path) -> str:
+        return md.convert(str(path)).text_content
+
+    result = convert_all(INPUT_DIR, OUTPUT_DIR, converter)
+    print(format_summary(result))
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())
