@@ -62,6 +62,19 @@ def convert_all(input_dir: Path, output_dir: Path, converter) -> ConversionResul
     return ConversionResult(succeeded=succeeded, failed=failed, skipped=skipped)
 
 
+def format_summary(result: ConversionResult) -> str:
+    lines = [
+        f"✅ 成功 {len(result.succeeded)} 件 / "
+        f"⏭ 非対応 {len(result.skipped)} 件 / "
+        f"❌ 失敗 {len(result.failed)} 件"
+    ]
+    if result.failed:
+        lines.append("失敗:")
+        for path, reason in result.failed:
+            lines.append(f"  - {path.name}: {reason}")
+    return "\n".join(lines)
+
+
 def main() -> int:
     print("convert.py: not implemented yet")
     return 0
