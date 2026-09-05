@@ -1,0 +1,2 @@
+markitdown[docx,pptx,xlsx,xls,pdf]==0.1.7
+pytest==9.1.1
