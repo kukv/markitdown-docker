@@ -15,6 +15,8 @@ concurrency:
 
 jobs:
   # 多エコシステム SCA(lockfile を再帰自動検出。リポ直下の osv-scanner.toml は自動適用)
+  # --no-resolve: requirements.txt は uv pip compile で全依存を固定済みなので、
+  # osv-scanner 側の推移解決(deps.dev 由来で onnxruntime の制約が衝突しスキャンごと失敗する)は不要
   sca:
     runs-on: ubuntu-latest
     permissions:
@@ -28,4 +30,5 @@ jobs:
           scan-args: |-
             --recursive
             --include-git-root
+            --no-resolve
             ./
