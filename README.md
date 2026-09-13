@@ -50,6 +50,7 @@ Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で�
 ## 開発
 
 clone して、ローカルビルドしたイメージで動かす。ローカルに Python は不要。
+GNU Make と Docker Compose が必要。
 
 ```bash
 make build   # compose.dev.yaml でイメージをビルド
