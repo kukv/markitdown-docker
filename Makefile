@@ -1,13 +1,15 @@
 .PHONY: build convert test clean
 
+DEV := docker compose
+
 build:
-	docker compose build
+	$(DEV) build
 
 convert:
-	docker compose run --rm markitdown
+	$(DEV) run --rm markitdown
 
 test:
-	docker compose run --rm --entrypoint python markitdown -m pytest -v
+	$(DEV) run --rm --entrypoint python markitdown -m pytest -v
 
 clean:
-	docker compose run --rm --entrypoint sh markitdown -c 'rm -f /data/output/*.md'
+	$(DEV) run --rm --entrypoint sh markitdown -c 'rm -f /data/output/*.md'

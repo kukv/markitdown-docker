@@ -1,5 +1,6 @@
 .idea/
 .superpowers/
+docs/superpowers/
 __pycache__/
 *.pyc
 .pytest_cache/
@@ -7,3 +8,8 @@ data/input/*
 data/output/*
 !data/input/.gitkeep
 !data/output/.gitkeep
+.env
+.env.*
+!.env.example
+.venv/
+venv/

@@ -1,54 +1,85 @@
 # markitdown-docker
 
-Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で動かし、
-各種ドキュメント（PDF / Word / Excel / PowerPoint）を Markdown に一括変換するツール。
-ローカル環境に Python や依存を入れずに使える。
+[日本語](README.ja.md)
 
-## 必要要件
+A Docker image that wraps Microsoft's [markitdown](https://github.com/microsoft/markitdown) and
+converts documents (PDF / Word / Excel / PowerPoint) to Markdown in batch. Nothing has to be
+installed locally — no Python, no dependencies.
 
-- Docker / Docker Compose
-- GNU Make
+> This is not an official Microsoft project. It is an unofficial wrapper that distributes
+> [markitdown](https://github.com/microsoft/markitdown) as a Docker image.
 
-## 使い方
+## Requirements
 
-1. イメージをビルド:
+- Docker
 
-   ```bash
-   make build
-   ```
+## Usage
 
-2. 変換したいファイルを `data/input/` に置く（対応形式: `.pdf` `.docx` `.pptx` `.xlsx` `.xls`）
-
-3. 変換を実行:
+1. Create the input and output directories:
 
    ```bash
-   make convert
+   mkdir -p data/input data/output
    ```
 
-4. `data/output/` に Markdown が出力される（例: `report.docx` → `report.md`）
+2. Put the files to convert into `data/input/` (supported: `.pdf` `.docx` `.pptx` `.xlsx` `.xls`)
 
-## 挙動
+3. Run the conversion:
 
-- 出力名は元ファイルの名前 + `.md`。**同名が既にあれば上書き**する。
-- 非対応形式や壊れたファイルが混ざっていても**止まらず**、最後に
-  `✅ 成功 N 件 / ⏭ 非対応 K 件 / ❌ 失敗 M 件` のサマリを表示する。
-- 入力はフラット構成（`data/input` 直下のみ）。サブフォルダ内は処理しない。
+   ```bash
+   docker run --rm \
+     -v "$PWD/data/input:/data/input" \
+     -v "$PWD/data/output:/data/output" \
+     ghcr.io/kukv/markitdown-docker:v0.1.0
+   ```
 
-> ⚠️ 注意: `report.docx` と `report.pdf` のように拡張子違いで同名のファイルがあると、
-> 出力 `report.md` が衝突し後勝ちで上書きされます（警告ログを表示）。
+4. The Markdown is written to `data/output/` (for example `report.docx` → `report.md`)
 
-## 開発
+> The container runs as uid/gid 1000, so output files are owned by that user. If your host user's
+> uid/gid is not 1000, add `--user "$(id -u):$(id -g)"` to the `docker run` command above.
 
-テスト（コンテナ内で実行。ローカル Python 不要）:
+## Behavior
+
+- The output name is the input file name with its extension replaced by `.md`. **An existing
+  file of that name is overwritten.**
+- Unsupported formats and broken files **do not stop the batch**. A summary is printed at the
+  end: `✅ 成功 N 件 / ⏭ 非対応 K 件 / ❌ 失敗 M 件` (succeeded / unsupported / failed — the
+  program prints it in Japanese).
+- The input is flat: only the files directly under `data/input` are read; subdirectories are not.
+
+> ⚠️ Note: files that differ only by extension, such as `report.docx` and `report.pdf`, both map
+> to `report.md`. The output collides and the one converted later wins (a warning is logged).
+
+## Development
+
+Clone the repository and run the locally built image. Python is not needed locally; Docker, the
+Docker Compose plugin and GNU Make are.
 
 ```bash
-make test
+make build   # build the image from compose.yaml
+make test    # run pytest inside the container
 ```
 
-| ファイル | 役割 |
-|----------|------|
-| `docker/Dockerfile` | イメージ定義 |
-| `docker/markitdown/convert.py` | 変換ドライバ |
-| `docker/markitdown/tests/` | pytest テスト |
-| `compose.yaml` | サービス定義・マウント |
+| File | Role |
+|------|------|
+| `docker/Dockerfile` | Image definition |
+| `docker/markitdown/convert.py` | Conversion driver |
+| `docker/markitdown/tests/` | pytest tests |
+| `compose.yaml` | Development definition: local build plus a source bind mount |
 | `Makefile` | `build` / `convert` / `test` / `clean` |
+
+## What is included
+
+- [markitdown](https://github.com/microsoft/markitdown) 0.1.7 (MIT, Microsoft)
+
+Every dependency is under a permissive license (MIT / BSD / Apache-2.0 and similar), and the full
+license text of each package ships inside the image in each package's `*.dist-info/` directory.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report vulnerabilities through the process in
+[SECURITY.md](SECURITY.md). Everyone taking part is expected to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+[MIT](LICENSE)

@@ -78,6 +78,11 @@ def format_summary(result: ConversionResult) -> str:
         lines.append("失敗:")
         for path, reason in result.failed:
             lines.append(f"  - {path.name}: {reason}")
+    if not result.succeeded and not result.skipped and not result.failed:
+        lines.append(
+            "ℹ  data/input に対象ファイルが見つかりませんでした。"
+            "マウントのパスが正しいか確認してください。"
+        )
     return "\n".join(lines)
 
 

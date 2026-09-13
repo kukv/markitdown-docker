@@ -1,0 +1,30 @@
+name: Bug report
+description: Something does not work as described
+labels: ["Kind: Bug Fix"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Wrong or poor Markdown from a file that converts is an upstream problem — report it to
+        [microsoft/markitdown](https://github.com/microsoft/markitdown). Do not attach
+        confidential documents here.
+  - type: input
+    id: image-tag
+    attributes:
+      label: Image tag
+      placeholder: ghcr.io/kukv/markitdown-docker:v0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The command you ran, what you expected, and what you got instead.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: The container output, including the summary line.
+      render: shell
