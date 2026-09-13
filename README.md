@@ -34,8 +34,12 @@ Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で�
 
 ### Docker Compose を使う場合
 
-このリポジトリの `compose.yaml` を手元に置けば `docker compose run --rm markitdown`
-でも実行できる。
+`compose.yaml` を取得すれば `docker compose run --rm markitdown` でも実行できる
+（Docker Compose プラグインが必要）。
+
+```bash
+curl -O https://raw.githubusercontent.com/kukv/markitdown-docker/main/compose.yaml
+```
 
 ## 挙動
 
