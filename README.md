@@ -34,15 +34,6 @@ installed locally — no Python, no dependencies.
 
 4. The Markdown is written to `data/output/` (for example `report.docx` → `report.md`)
 
-### With Docker Compose
-
-Fetch `compose.yaml` and the same run becomes `docker compose run --rm markitdown`
-(the Docker Compose plugin is required).
-
-```bash
-curl -O https://raw.githubusercontent.com/kukv/markitdown-docker/main/compose.yaml
-```
-
 ## Behavior
 
 - The output name is the input file name with its extension replaced by `.md`. **An existing
@@ -61,7 +52,7 @@ Clone the repository and run the locally built image. Python is not needed local
 Docker Compose plugin and GNU Make are.
 
 ```bash
-make build   # build the image from compose.dev.yaml
+make build   # build the image from compose.yaml
 make test    # run pytest inside the container
 ```
 
@@ -70,8 +61,7 @@ make test    # run pytest inside the container
 | `docker/Dockerfile` | Image definition |
 | `docker/markitdown/convert.py` | Conversion driver |
 | `docker/markitdown/tests/` | pytest tests |
-| `compose.yaml` | Definition for users running the distributed image |
-| `compose.dev.yaml` | Development definition: local build plus a source bind mount |
+| `compose.yaml` | Development definition: local build plus a source bind mount |
 | `Makefile` | `build` / `convert` / `test` / `clean` |
 
 ## What is included

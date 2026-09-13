@@ -1,6 +1,6 @@
 .PHONY: build convert test clean
 
-DEV := docker compose -f compose.dev.yaml
+DEV := docker compose
 
 build:
 	$(DEV) build

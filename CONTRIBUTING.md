@@ -14,19 +14,16 @@ pytest inside the container.
 You do **not** need Python locally. Docker, the Docker Compose plugin and GNU Make are enough.
 
 ```bash
-make build     # build the image from compose.dev.yaml
+make build     # build the image from compose.yaml
 make test      # run pytest inside the container
 make convert   # convert whatever is in data/input into data/output
 make clean     # remove the generated *.md from data/output
 ```
 
-There are two compose files and they are not interchangeable. `compose.dev.yaml` builds the image
-locally and bind-mounts `./docker/markitdown` onto `/app`, so `make test` and `make convert` run
-against your working tree. `compose.yaml` is what users download on its own: it pulls the pinned
-`ghcr.io/kukv/markitdown-docker:vX.Y.Z` image and mounts only `data/input` and `data/output`.
-Never add the `/app` mount there — a user who fetched just `compose.yaml` has no
-`docker/markitdown/` directory, so Docker would create an empty one and shadow the `convert.py`
-inside the image.
+`compose.yaml` is the development definition: it builds the image locally and bind-mounts
+`./docker/markitdown` onto `/app`, so `make test` and `make convert` run against your working
+tree. The image published to GHCR does not carry that mount — `convert.py` is baked into it at
+build time — so the bind mount only ever affects a local build, never the distributed image.
 
 Please keep the following in mind.
 
@@ -79,8 +76,7 @@ the maintainer always pushes the tag from a local clone.
    labels of the pull requests included (a tag containing a `-` is published as a prerelease).
 3. **First release only**: a package pushed to GHCR is created private. Switch it to Public by
    hand in the package settings, otherwise `docker run` fails for everyone else.
-4. Update the image tag in the four places it is pinned:
-   - `compose.yaml`
+4. Update the image tag in the three places it is pinned:
    - `README.md`
    - `README.ja.md`
    - `.github/ISSUE_TEMPLATE/bug_report.yml` (the placeholder)

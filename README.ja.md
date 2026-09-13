@@ -34,15 +34,6 @@ Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で�
 
 4. `data/output/` に Markdown が出力される（例: `report.docx` → `report.md`）
 
-### Docker Compose を使う場合
-
-`compose.yaml` を取得すれば `docker compose run --rm markitdown` でも実行できる
-（Docker Compose プラグインが必要）。
-
-```bash
-curl -O https://raw.githubusercontent.com/kukv/markitdown-docker/main/compose.yaml
-```
-
 ## 挙動
 
 - 出力名は元ファイルの拡張子を `.md` に置き換えたもの。**同名が既にあれば上書き**する。
@@ -59,7 +50,7 @@ clone して、ローカルビルドしたイメージで動かす。ローカ�
 Docker、Docker Compose プラグイン、GNU Make が必要。
 
 ```bash
-make build   # compose.dev.yaml でイメージをビルド
+make build   # compose.yaml でイメージをビルド
 make test    # コンテナ内で pytest を実行
 ```
 
@@ -68,8 +59,7 @@ make test    # コンテナ内で pytest を実行
 | `docker/Dockerfile` | イメージ定義 |
 | `docker/markitdown/convert.py` | 変換ドライバ |
 | `docker/markitdown/tests/` | pytest テスト |
-| `compose.yaml` | 配布イメージを使う利用者向け定義 |
-| `compose.dev.yaml` | ローカルビルド + ソース bind mount の開発用定義 |
+| `compose.yaml` | ローカルビルド + ソース bind mount の開発用定義 |
 | `Makefile` | `build` / `convert` / `test` / `clean` |
 
 ## 同梱しているもの
