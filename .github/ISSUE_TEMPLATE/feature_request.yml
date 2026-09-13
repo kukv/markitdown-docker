@@ -1,0 +1,14 @@
+name: 機能要望
+description: こういうことができると嬉しい、はこちら
+labels: ["Kind: Feature"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したいこと
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 考えている案

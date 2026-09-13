@@ -1,0 +1,23 @@
+name: バグ報告
+description: 動作がおかしいときはこちら
+labels: ["Kind: Bug Fix"]
+body:
+  - type: input
+    id: image-tag
+    attributes:
+      label: 使用したイメージタグ
+      placeholder: ghcr.io/kukv/markitdown-docker:v0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 何が起きたか
+      description: 再現手順と、期待した結果・実際の結果
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: ログ
+      render: shell
