@@ -80,7 +80,7 @@ def format_summary(result: ConversionResult) -> str:
             lines.append(f"  - {path.name}: {reason}")
     if not result.succeeded and not result.skipped and not result.failed:
         lines.append(
-            "ℹ️  data/input に対象ファイルが見つかりませんでした。"
+            "ℹ  data/input に対象ファイルが見つかりませんでした。"
             "マウントのパスが正しいか確認してください。"
         )
     return "\n".join(lines)
