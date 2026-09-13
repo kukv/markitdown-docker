@@ -1,27 +1,29 @@
 # markitdown-docker
 
-Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で動かし、
-各種ドキュメント（PDF / Word / Excel / PowerPoint）を Markdown に一括変換するツール。
-ローカル環境に Python や依存を入れずに使える。
+[日本語](README.ja.md)
 
-> Microsoft 公式のプロジェクトではありません。[markitdown](https://github.com/microsoft/markitdown)
-> を Docker イメージとして配布する非公式のラッパーです。
+A Docker image around Microsoft [markitdown](https://github.com/microsoft/markitdown) that
+converts documents (PDF / Word / Excel / PowerPoint) to Markdown in batch. Nothing has to be
+installed locally — no Python, no dependencies.
 
-## 必要要件
+> This is not an official Microsoft project. It is an unofficial wrapper that distributes
+> [markitdown](https://github.com/microsoft/markitdown) as a Docker image.
+
+## Requirements
 
 - Docker
 
-## 使い方
+## Usage
 
-1. 入出力ディレクトリを作る:
+1. Create the input and output directories:
 
    ```bash
    mkdir -p data/input data/output
    ```
 
-2. 変換したいファイルを `data/input/` に置く（対応形式: `.pdf` `.docx` `.pptx` `.xlsx` `.xls`）
+2. Put the files to convert into `data/input/` (supported: `.pdf` `.docx` `.pptx` `.xlsx` `.xls`)
 
-3. 変換を実行:
+3. Run the conversion:
 
    ```bash
    docker run --rm \
@@ -30,53 +32,61 @@ Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で�
      ghcr.io/kukv/markitdown-docker:v0.1.0
    ```
 
-4. `data/output/` に Markdown が出力される（例: `report.docx` → `report.md`）
+4. The Markdown is written to `data/output/` (for example `report.docx` → `report.md`)
 
-### Docker Compose を使う場合
+### With Docker Compose
 
-`compose.yaml` を取得すれば `docker compose run --rm markitdown` でも実行できる
-（Docker Compose プラグインが必要）。
+Fetch `compose.yaml` and the same run becomes `docker compose run --rm markitdown`
+(the Docker Compose plugin is required).
 
 ```bash
 curl -O https://raw.githubusercontent.com/kukv/markitdown-docker/main/compose.yaml
 ```
 
-## 挙動
+## Behavior
 
-- 出力名は元ファイルの名前 + `.md`。**同名が既にあれば上書き**する。
-- 非対応形式や壊れたファイルが混ざっていても**止まらず**、最後に
-  `✅ 成功 N 件 / ⏭ 非対応 K 件 / ❌ 失敗 M 件` のサマリを表示する。
-- 入力はフラット構成（`data/input` 直下のみ）。サブフォルダ内は処理しない。
+- The output name is the input file name plus `.md`. **An existing file of that name is
+  overwritten.**
+- Unsupported formats and broken files **do not stop the batch**. A summary is printed at the
+  end: `✅ 成功 N 件 / ⏭ 非対応 K 件 / ❌ 失敗 M 件` (succeeded / unsupported / failed — the
+  program prints it in Japanese).
+- The input is flat: only the files directly under `data/input` are read, subdirectories are not.
 
-> ⚠️ 注意: `report.docx` と `report.pdf` のように拡張子違いで同名のファイルがあると、
-> 出力 `report.md` が衝突し後勝ちで上書きされます（警告ログを表示）。
+> ⚠️ Note: files that differ only by extension, such as `report.docx` and `report.pdf`, both map
+> to `report.md`. The output collides and the one converted later wins (a warning is logged).
 
-## 開発
+## Development
 
-clone して、ローカルビルドしたイメージで動かす。ローカルに Python は不要。
-GNU Make と Docker Compose が必要。
+Clone the repository and run the locally built image. Python is not needed locally; Docker, the
+Docker Compose plugin and GNU Make are.
 
 ```bash
-make build   # compose.dev.yaml でイメージをビルド
-make test    # コンテナ内で pytest を実行
+make build   # build the image from compose.dev.yaml
+make test    # run pytest inside the container
 ```
 
-| ファイル | 役割 |
-|----------|------|
-| `docker/Dockerfile` | イメージ定義 |
-| `docker/markitdown/convert.py` | 変換ドライバ |
-| `docker/markitdown/tests/` | pytest テスト |
-| `compose.yaml` | 配布イメージを使う利用者向け定義 |
-| `compose.dev.yaml` | ローカルビルド + ソース bind mount の開発用定義 |
+| File | Role |
+|------|------|
+| `docker/Dockerfile` | Image definition |
+| `docker/markitdown/convert.py` | Conversion driver |
+| `docker/markitdown/tests/` | pytest tests |
+| `compose.yaml` | Definition for users running the distributed image |
+| `compose.dev.yaml` | Development definition: local build plus a source bind mount |
 | `Makefile` | `build` / `convert` / `test` / `clean` |
 
-## 同梱しているもの
+## What is included
 
 - [markitdown](https://github.com/microsoft/markitdown) 0.1.7 (MIT, Microsoft)
 
-依存パッケージはすべて permissive ライセンス（MIT / BSD / Apache-2.0 ほか）で、
-各パッケージのライセンス全文はイメージ内の `*.dist-info/LICENSE` に同梱されている。
+Every dependency is under a permissive license (MIT / BSD / Apache-2.0 and similar), and the full
+license text of each package ships inside the image under `*.dist-info/LICENSE`.
 
-## ライセンス
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report vulnerabilities through the process in
+[SECURITY.md](SECURITY.md). Everyone taking part is expected to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
 
 [MIT](LICENSE)
