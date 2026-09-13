@@ -6,9 +6,10 @@ Thanks for taking the time to improve markitdown-docker.
 
 This repository is a Docker image around Microsoft's
 [markitdown](https://github.com/microsoft/markitdown). `docker/Dockerfile` installs the pinned
-dependencies and `docker/markitdown/convert.py` — one file — is the whole driver: it walks
-`/data/input`, converts every supported file, writes `<stem>.md` into `/data/output`, and prints
-a summary. The tests live in `docker/markitdown/tests/` and run with pytest inside the container.
+dependencies and `docker/markitdown/convert.py` — one file — is the whole driver: it reads the
+files directly under `/data/input`, converts every supported one, writes `<stem>.md` into
+`/data/output`, and prints a summary. The tests live in `docker/markitdown/tests/` and run with
+pytest inside the container.
 
 You do **not** need Python locally. Docker, the Docker Compose plugin and GNU Make are enough.
 
@@ -73,7 +74,7 @@ the maintainer always pushes the tag from a local clone.
    git push origin vX.Y.Z
    ```
 
-2. `release.yml` builds the `linux/amd64` and `linux/arm64` image, pushes it to GHCR with
+2. `release.yml` builds the image for `linux/amd64` and `linux/arm64`, pushes it to GHCR with
    provenance and SBOM attestations, and creates the GitHub Release with notes generated from the
    labels of the pull requests included (a tag containing a `-` is published as a prerelease).
 3. **First release only**: a package pushed to GHCR is created private. Switch it to Public by

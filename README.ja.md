@@ -45,7 +45,7 @@ curl -O https://raw.githubusercontent.com/kukv/markitdown-docker/main/compose.ya
 
 ## 挙動
 
-- 出力名は元ファイルの名前 + `.md`。**同名が既にあれば上書き**する。
+- 出力名は元ファイルの拡張子を `.md` に置き換えたもの。**同名が既にあれば上書き**する。
 - 非対応形式や壊れたファイルが混ざっていても**止まらず**、最後に
   `✅ 成功 N 件 / ⏭ 非対応 K 件 / ❌ 失敗 M 件` のサマリを表示する。
 - 入力はフラット構成（`data/input` 直下のみ）。サブフォルダ内は処理しない。
@@ -77,7 +77,7 @@ make test    # コンテナ内で pytest を実行
 - [markitdown](https://github.com/microsoft/markitdown) 0.1.7 (MIT, Microsoft)
 
 依存パッケージはすべて permissive ライセンス（MIT / BSD / Apache-2.0 ほか）で、
-各パッケージのライセンス全文はイメージ内の `*.dist-info/LICENSE` に同梱されている。
+各パッケージのライセンス全文はイメージ内の `*.dist-info/` 配下に同梱されている。
 
 ## コントリビュート
 

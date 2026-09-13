@@ -2,7 +2,7 @@
 
 [日本語](README.ja.md)
 
-A Docker image around Microsoft [markitdown](https://github.com/microsoft/markitdown) that
+A Docker image that wraps Microsoft's [markitdown](https://github.com/microsoft/markitdown) and
 converts documents (PDF / Word / Excel / PowerPoint) to Markdown in batch. Nothing has to be
 installed locally — no Python, no dependencies.
 
@@ -45,12 +45,12 @@ curl -O https://raw.githubusercontent.com/kukv/markitdown-docker/main/compose.ya
 
 ## Behavior
 
-- The output name is the input file name plus `.md`. **An existing file of that name is
-  overwritten.**
+- The output name is the input file name with its extension replaced by `.md`. **An existing
+  file of that name is overwritten.**
 - Unsupported formats and broken files **do not stop the batch**. A summary is printed at the
   end: `✅ 成功 N 件 / ⏭ 非対応 K 件 / ❌ 失敗 M 件` (succeeded / unsupported / failed — the
   program prints it in Japanese).
-- The input is flat: only the files directly under `data/input` are read, subdirectories are not.
+- The input is flat: only the files directly under `data/input` are read; subdirectories are not.
 
 > ⚠️ Note: files that differ only by extension, such as `report.docx` and `report.pdf`, both map
 > to `report.md`. The output collides and the one converted later wins (a warning is logged).
@@ -79,7 +79,7 @@ make test    # run pytest inside the container
 - [markitdown](https://github.com/microsoft/markitdown) 0.1.7 (MIT, Microsoft)
 
 Every dependency is under a permissive license (MIT / BSD / Apache-2.0 and similar), and the full
-license text of each package ships inside the image under `*.dist-info/LICENSE`.
+license text of each package ships inside the image in each package's `*.dist-info/` directory.
 
 ## Contributing
 
