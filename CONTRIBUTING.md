@@ -78,9 +78,10 @@ the maintainer always pushes the tag from a local clone.
    labels of the pull requests included (a tag containing a `-` is published as a prerelease).
 3. **First release only**: a package pushed to GHCR is created private. Switch it to Public by
    hand in the package settings, otherwise `docker run` fails for everyone else.
-4. Update the image tag in the three places it is pinned:
+4. Update the image tag in the four places it is pinned:
    - `compose.yaml`
    - `README.md`
+   - `README.ja.md`
    - `.github/ISSUE_TEMPLATE/bug_report.yml` (the placeholder)
 
 No `latest` tag is published. `vX.Y.Z` and `X.Y.Z` are never moved once pushed; `X.Y` follows the
