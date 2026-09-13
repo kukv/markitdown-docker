@@ -34,6 +34,9 @@ Microsoft [markitdown](https://github.com/microsoft/markitdown) を Docker で�
 
 4. `data/output/` に Markdown が出力される（例: `report.docx` → `report.md`）
 
+> コンテナは uid/gid 1000 で動作するため、出力ファイルもそのユーザー所有になる。ホスト側の
+> uid/gid が 1000 でない場合は、上記の `docker run` に `--user "$(id -u):$(id -g)"` を追加すること。
+
 ## 挙動
 
 - 出力名は元ファイルの拡張子を `.md` に置き換えたもの。**同名が既にあれば上書き**する。

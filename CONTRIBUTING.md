@@ -44,6 +44,9 @@ Please keep the following in mind.
    `uv pip compile requirements.in -o requirements.txt`.
 5. Pin any GitHub Action you add to a full commit SHA with a `# vX.Y.Z` comment, and pin Docker
    images by digest. Renovate keeps those pins current.
+6. The image runs as a non-root user, uid/gid 1000 — chosen because it matches the default first
+   user on most Linux desktops, so a bind-mounted `data/output` is writable without extra setup.
+   Keep `USER` as the last instruction in the Dockerfile; anything that needs root goes above it.
 
 ## Pull requests
 

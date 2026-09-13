@@ -34,6 +34,9 @@ installed locally — no Python, no dependencies.
 
 4. The Markdown is written to `data/output/` (for example `report.docx` → `report.md`)
 
+> The container runs as uid/gid 1000, so output files are owned by that user. If your host user's
+> uid/gid is not 1000, add `--user "$(id -u):$(id -g)"` to the `docker run` command above.
+
 ## Behavior
 
 - The output name is the input file name with its extension replaced by `.md`. **An existing
