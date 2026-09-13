@@ -1,14 +1,20 @@
-name: 機能要望
-description: こういうことができると嬉しい、はこちら
+name: Feature request
+description: Suggest something this image should do
 labels: ["Kind: Feature"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository only packages
+        [markitdown](https://github.com/microsoft/markitdown). New formats and better conversion
+        belong upstream; ask here about how the image, the batch driver, or the distribution work.
   - type: textarea
     id: problem
     attributes:
-      label: 解決したいこと
+      label: The problem you want solved
     validations:
       required: true
   - type: textarea
     id: idea
     attributes:
-      label: 考えている案
+      label: What you have in mind
