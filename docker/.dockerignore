@@ -1,0 +1,4 @@
+markitdown/tests/
+markitdown/requirements.in
+**/__pycache__/
+**/*.pyc

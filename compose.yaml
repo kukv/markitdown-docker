@@ -1,10 +1,6 @@
 services:
   markitdown:
-    build:
-      context: ./docker
-      dockerfile: Dockerfile
-    image: markitdown-docker:local
+    image: ghcr.io/kukv/markitdown-docker:v0.1.0
     volumes:
       - ./data/input:/data/input
       - ./data/output:/data/output
-      - ./docker/markitdown:/app
