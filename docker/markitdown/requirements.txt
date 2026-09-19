@@ -46,7 +46,7 @@ numpy==2.5.3
     #   magika
     #   onnxruntime
     #   pandas
-onnxruntime==1.29.0
+onnxruntime==1.30.0
     # via magika
 openpyxl==3.1.5
     # via markitdown
