@@ -41,7 +41,7 @@ markdownify==1.2.3
     # via markitdown
 markitdown==0.1.7
     # via -r requirements.in
-numpy==2.5.2
+numpy==2.5.3
     # via
     #   magika
     #   onnxruntime
