@@ -25,7 +25,7 @@ et-xmlfile==2.0.0
     # via openpyxl
 flatbuffers==25.12.19
     # via onnxruntime
-idna==3.19
+idna==3.20
     # via requests
 iniconfig==2.3.0
     # via pytest
