@@ -17,7 +17,7 @@ click==8.5.0
     # via magika
 cobble==0.1.4
     # via mammoth
-cryptography==50.0.1
+cryptography==50.0.2
     # via pdfminer-six
 defusedxml==0.7.1
     # via markitdown
