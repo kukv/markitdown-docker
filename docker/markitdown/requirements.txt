@@ -80,7 +80,7 @@ pytest==9.1.1
     # via -r requirements.in
 python-dateutil==2.9.0.post0
     # via pandas
-python-dotenv==1.2.3
+python-dotenv==1.2.4
     # via magika
 python-pptx==1.0.2
     # via markitdown
