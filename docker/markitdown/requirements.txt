@@ -74,7 +74,7 @@ pycparser==3.11
     # via cffi
 pygments==2.21.0
     # via pytest
-pypdfium2==5.13.0
+pypdfium2==5.14.0
     # via pdfplumber
 pytest==9.1.1
     # via -r requirements.in
