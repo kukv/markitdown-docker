@@ -70,7 +70,7 @@ pluggy==1.6.0
     # via pytest
 protobuf==7.36.2
     # via onnxruntime
-pycparser==3.0
+pycparser==3.11
     # via cffi
 pygments==2.21.0
     # via pytest
