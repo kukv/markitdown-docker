@@ -66,7 +66,7 @@ pillow==12.3.0
     # via
     #   pdfplumber
     #   python-pptx
-pluggy==1.6.0
+pluggy==1.7.0
     # via pytest
 protobuf==7.36.2
     # via onnxruntime
