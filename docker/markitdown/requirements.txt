@@ -4,8 +4,10 @@ beautifulsoup4==4.15.0
     # via
     #   markdownify
     #   markitdown
-certifi==2026.7.22
-    # via requests
+certifi==2026.10.23
+    # via
+    #   markitdown
+    #   requests
 cffi==2.1.1
     # via cryptography
 charset-normalizer==3.5.2
@@ -39,9 +41,9 @@ mammoth==1.13.0
     # via markitdown
 markdownify==1.2.3
     # via markitdown
-markitdown==0.1.8
+markitdown==0.1.9
     # via -r requirements.in
-numpy==2.5.3
+numpy==2.5.4
     # via
     #   magika
     #   onnxruntime
@@ -54,7 +56,7 @@ packaging==26.3
     # via
     #   onnxruntime
     #   pytest
-pandas==3.0.6
+pandas==3.1.0
     # via markitdown
 pdfminer-six==20260107
     # via
@@ -62,15 +64,15 @@ pdfminer-six==20260107
     #   pdfplumber
 pdfplumber==0.11.10
     # via markitdown
-pillow==12.3.0
+pillow==13.0.0
     # via
     #   pdfplumber
     #   python-pptx
-pluggy==1.6.0
+pluggy==1.7.0
     # via pytest
 protobuf==7.36.2
     # via onnxruntime
-pycparser==3.11
+pycparser==3.12
     # via cffi
 pygments==2.21.0
     # via pytest
@@ -78,7 +80,7 @@ pypdfium2==5.14.0
     # via pdfplumber
 pytest==9.1.1
     # via -r requirements.in
-python-dateutil==2.9.0.post0
+python-dateutil==3.0.0
     # via pandas
 python-dotenv==1.2.4
     # via magika
@@ -90,15 +92,17 @@ six==1.17.0
     # via
     #   markdownify
     #   python-dateutil
-soupsieve==2.10
+soupsieve==3.0.4
     # via beautifulsoup4
 typing-extensions==4.16.0
     # via
     #   beautifulsoup4
     #   python-pptx
+tzdata==2026.6
+    # via python-dateutil
 urllib3==2.8.0
     # via requests
 xlrd==2.0.2
     # via markitdown
-xlsxwriter==3.2.9
+xlsxwriter==3.3.0
     # via python-pptx
