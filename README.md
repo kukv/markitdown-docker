@@ -69,7 +69,7 @@ make test    # run pytest inside the container
 
 ## What is included
 
-- [markitdown](https://github.com/microsoft/markitdown) 0.1.7 (MIT, Microsoft)
+- [markitdown](https://github.com/microsoft/markitdown) 0.1.9 (MIT, Microsoft)
 
 Every dependency is under a permissive license (MIT / BSD / Apache-2.0 and similar), and the full
 license text of each package ships inside the image in each package's `*.dist-info/` directory.

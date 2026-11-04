@@ -67,7 +67,7 @@ make test    # コンテナ内で pytest を実行
 
 ## 同梱しているもの
 
-- [markitdown](https://github.com/microsoft/markitdown) 0.1.7 (MIT, Microsoft)
+- [markitdown](https://github.com/microsoft/markitdown) 0.1.9 (MIT, Microsoft)
 
 依存パッケージはすべて permissive ライセンス（MIT / BSD / Apache-2.0 ほか）で、
 各パッケージのライセンス全文はイメージ内の `*.dist-info/` 配下に同梱されている。
