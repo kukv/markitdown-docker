@@ -104,5 +104,5 @@ urllib3==2.8.0
     # via requests
 xlrd==2.0.2
     # via markitdown
-xlsxwriter==3.3.0
+xlsxwriter==3.3.1
     # via python-pptx
