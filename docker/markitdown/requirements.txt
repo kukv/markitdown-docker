@@ -78,7 +78,7 @@ pygments==2.21.0
     # via pytest
 pypdfium2==5.14.0
     # via pdfplumber
-pytest==9.1.1
+pytest==9.2.0
     # via -r requirements.in
 python-dateutil==3.0.0
     # via pandas
