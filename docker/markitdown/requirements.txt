@@ -92,7 +92,7 @@ six==1.17.0
     # via
     #   markdownify
     #   python-dateutil
-soupsieve==3.0.4
+soupsieve==4.0
     # via beautifulsoup4
 typing-extensions==4.16.0
     # via
