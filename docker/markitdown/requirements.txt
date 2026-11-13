@@ -80,7 +80,7 @@ pypdfium2==5.14.0
     # via pdfplumber
 pytest==9.2.0
     # via -r requirements.in
-python-dateutil==3.0.0
+python-dateutil==4.0.0
     # via pandas
 python-dotenv==1.2.4
     # via magika
