@@ -39,7 +39,7 @@ magika==0.6.3
     # via markitdown
 mammoth==1.13.0
     # via markitdown
-markdownify==1.2.3
+markdownify==1.2.4
     # via markitdown
 markitdown==0.1.9
     # via -r requirements.in
